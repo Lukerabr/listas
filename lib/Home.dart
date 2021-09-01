@@ -9,8 +9,29 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+  List _itens = [];
+
+  void _carregarItens(){
+
+    //para zerar quando der o hotreload
+    _itens = [];
+
+    for(int i=0; i <= 10; i++){
+
+      Map<String, dynamic> item = Map();
+      item["titulo"] = "Título ${i} Lorem ipsum dolor sit amet.";
+      item["descricao"] = "Descição ${i} Lorem ipsum dolor sit amet.";
+      _itens.add(item);
+    }
+
+  }
+
   @override
   Widget build(BuildContext context) {
+
+    _carregarItens();
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Lista"),
@@ -18,12 +39,13 @@ class _HomeState extends State<Home> {
       body: Container(
         padding: EdgeInsets.all(20),
         child: ListView.builder(
-          itemCount: 5,
+          itemCount: _itens.length,
           itemBuilder: (context, indice){
-            print("item ${indice}");
+            //Map<String, dynamic> item = _itens[indice];
+            //print("item ${item["titulo"]}");
             return ListTile(
-              title: Text(indice.toString()),
-              subtitle: Text("subtitulo"),
+              title: Text(_itens[indice]["titulo"]),
+              subtitle: Text(_itens[indice]["descricao"]),
             );
           }
         ),
