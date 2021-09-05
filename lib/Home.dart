@@ -46,6 +46,44 @@ class _HomeState extends State<Home> {
             return ListTile(
               title: Text(_itens[indice]["titulo"]),
               subtitle: Text(_itens[indice]["descricao"]),
+              onTap: (){
+                //print("clique com onTap: ${indice}");
+                showDialog(
+                    context: context,
+                    builder: (context){
+                      return AlertDialog(
+                        title: Text(_itens[indice]["titulo"]),
+                        titlePadding: EdgeInsets.all(40),
+                        titleTextStyle: TextStyle(
+                          fontSize: 20,
+                          color: Colors.orange
+                        ),
+                        content: Text(_itens[indice]["descricao"]),
+                        contentPadding: EdgeInsets.all(40),
+                        backgroundColor: Colors.white,
+                        actions: <Widget>[
+                          TextButton(
+                              onPressed: (){
+                                print("Selecionado sim");
+                                Navigator.pop(context);
+                              },
+                              child: Text("Sim!")
+                          ),
+                          TextButton(
+                              onPressed: (){
+                                print("Selecionado não");
+                                Navigator.pop(context);
+                              },
+                              child: Text("Não!")
+                          )
+                        ],
+                      );
+                    }
+                );
+              },
+              /*onLongPress: (){
+                print("clique com onLongPress");
+              },*/
             );
           }
         ),
